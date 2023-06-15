@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
         minlength: 10,
-        maxlength: 10,
+        maxlength: 13,
     },
     gender: {
         type: String,
@@ -34,8 +34,8 @@ const userSchema = new mongoose.Schema({
         enum: ["Active", "In-Active"],
         default: "Active"
     },
-    dateCreated: Date,
-    dateUpdated: Date
+    datecreated: Date,
+    dateupdated: Date
 })
 
 // defining model
