@@ -50,13 +50,26 @@ exports.updateUserById = async (req, res) => {
 
 // get all users
 exports.getUsers = async (req, res) => {
+    const { search, status, gender } = req.query;
+    const query = {};
+
+    if (search) {
+        query.firstname = { $regex: search, $options: 'i' };
+    }
+    if (status && status !== 'All') {
+        query.status = status;
+    }
+    if (gender && gender !== 'All') {
+        query.gender = gender;
+    }
+
     try {
-        const userData = await users.find()
+        const userData = await users.find(query);
         res.status(200).json(userData)
     }
     catch (error) {
         res.status(400).json(error)
-        console.log("Catch Block Error")
+        console.log("Catch Block Error", error)
     }
 }
 
